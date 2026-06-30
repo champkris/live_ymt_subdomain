@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Yushi Marketing — Live Streaming Business Profile</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@400;500;600;700;800&family=Sora:wght@400;600;700;800&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --bg:#0a0a0d;
+    --card:#16161d;
+    --card-2:#1c1c25;
+    --line:rgba(255,255,255,.10);
+    --txt:#f4f4f6;
+    --muted:#9a9aa6;
+    --grad:linear-gradient(120deg,#4f7cff 0%,#9b5cff 35%,#ff5ca8 68%,#ff8a3d 100%);
+    --grad-soft:linear-gradient(120deg,rgba(79,124,255,.18),rgba(255,92,168,.16),rgba(255,138,61,.18));
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%}
+  body{background:#000;color:var(--txt);font-family:'Noto Sans Thai','Sora',system-ui,sans-serif;overflow:hidden}
+  h1,h2,h3,.dsp{font-family:'Sora','Noto Sans Thai',sans-serif;letter-spacing:-.02em;line-height:1.08}
+  .grad-text{background:var(--grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+  img{display:block;max-width:100%}
+
+  /* ---------- Deck mechanics ---------- */
+  .deck{display:flex;width:100vw;height:100vh;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;scroll-behavior:smooth;scrollbar-width:none}
+  .deck::-webkit-scrollbar{display:none}
+  .slide{position:relative;flex:0 0 100vw;height:100vh;scroll-snap-align:center;display:flex;overflow:hidden;background:var(--bg)}
+  /* 16:9 stage centered with letterbox */
+  .stage{position:relative;margin:auto;width:min(100vw,177.78vh);height:min(56.25vw,100vh);overflow:hidden;background:var(--bg)}
+  .pad{position:absolute;inset:0;padding:5.2% 6%}
+  .center{display:flex;flex-direction:column;justify-content:center}
+
+  /* watermark */
+  .wm{position:absolute;left:6%;bottom:5%;z-index:5}
+  .wm b{display:block;font-family:'Sora',sans-serif;font-size:.78vw;letter-spacing:.22em;color:rgba(255,255,255,.55);font-weight:700}
+  .wm span{font-size:.78vw;color:rgba(255,255,255,.32)}
+  .pageno{position:absolute;right:6%;bottom:5%;z-index:5;font-family:'Sora',sans-serif;font-size:.78vw;color:rgba(255,255,255,.35)}
+
+  .eyebrow{font-family:'Sora',sans-serif;font-size:.95vw;letter-spacing:.3em;text-transform:uppercase;color:var(--muted);font-weight:600}
+  .eyebrow.it{font-style:italic;letter-spacing:.04em;text-transform:none;font-size:1.5vw}
+
+  /* glows */
+  .glow{position:absolute;border-radius:50%;filter:blur(90px);z-index:0;pointer-events:none}
+  .g-tl{top:-12%;left:-8%;width:34vw;height:34vw;background:var(--grad);opacity:.16}
+  .g-br{bottom:-15%;right:-10%;width:40vw;height:40vw;background:var(--grad);opacity:.14}
+
+  /* ---------- Cover ---------- */
+  .cover .bgimg{position:absolute;inset:0;z-index:0}
+  .cover .bgimg img{width:100%;height:100%;object-fit:cover;opacity:.38}
+  .cover .bgimg::after{content:"";position:absolute;inset:0;background:
+    linear-gradient(90deg,#0a0a0d 16%,rgba(10,10,13,.6) 60%,rgba(10,10,13,.3)),
+    linear-gradient(180deg,rgba(10,10,13,.85) 0%,rgba(10,10,13,0) 30%)}
+  .cover .pad{z-index:2}
+  .cover .logo{height:8vh;width:auto;align-self:flex-start;margin-bottom:4.5vh;filter:drop-shadow(0 .3vh 1.2vh rgba(0,0,0,.9))}
+
+  /* corner logo on every slide */
+  .cornerlogo{position:absolute;top:5%;right:5.5%;height:4.4vh;width:auto;z-index:6;opacity:1;filter:drop-shadow(0 .2vh .9vh rgba(0,0,0,.7));pointer-events:none}
+  .cover h1{font-size:6.6vw;font-weight:800}
+  .cover .sub{font-size:1.9vw;color:#dcdce4;margin-top:2.4vh;max-width:46vw;font-weight:500}
+  .badge{display:inline-flex;align-self:flex-start;align-items:center;gap:.6vw;padding:.7vh 1.3vw;border-radius:999px;border:1px solid var(--line);background:rgba(255,255,255,.05);font-family:'Sora',sans-serif;font-weight:700;font-size:.95vw;letter-spacing:.14em}
+  .dot{width:.6vw;height:.6vw;border-radius:50%;background:#ff4d4d;box-shadow:0 0 0 0 rgba(255,77,77,.6);animation:pulse 1.6s infinite}
+  @keyframes pulse{70%{box-shadow:0 0 0 .8vw rgba(255,77,77,0)}100%{box-shadow:0 0 0 0 rgba(255,77,77,0)}}
+
+  .slide-title{font-size:4vw;font-weight:800;margin:.6vh 0 1vh}
+  .slide-sub{font-size:1.5vw;color:var(--muted);max-width:50vw}
+
+  /* ---------- Stats ---------- */
+  .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1.4vw;margin-top:4vh}
+  .stat{background:var(--card);border:1px solid var(--line);border-radius:1vw;padding:3vh 1.6vw;text-align:center}
+  .stat .n{font-family:'Sora',sans-serif;font-weight:800;font-size:3.4vw;line-height:1}
+  .stat .l{font-weight:600;margin-top:1vh;font-size:1.15vw}
+  .stat .s{color:var(--muted);font-size:.95vw}
+
+  /* ---------- Two column ---------- */
+  .two{display:grid;grid-template-columns:1fr 1fr;height:100%}
+  .two .left{position:relative;display:flex;flex-direction:column;justify-content:center;padding:5.2% 3% 5.2% 6%}
+  .two .right{position:relative}
+  .two .right img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+
+  /* numbered points */
+  .points{display:flex;flex-direction:column;gap:3.2vh;margin-top:2vh}
+  .point{display:flex;gap:1.4vw;align-items:flex-start}
+  .point .num{flex:0 0 auto;width:2.8vw;height:2.8vw;border-radius:50%;background:var(--grad);display:flex;align-items:center;justify-content:center;font-family:'Sora',sans-serif;font-weight:800;font-size:1.3vw;color:#fff}
+  .point h3{font-size:1.9vw;font-weight:700;margin-bottom:.5vh}
+  .point .th{color:#fff}
+  .point p{color:var(--muted);font-size:1.15vw;line-height:1.45}
+
+  /* ---------- Gallery ---------- */
+  .gal{display:grid;gap:1vw;margin-top:3vh;height:62%}
+  .gal.g6{grid-template-columns:repeat(3,1fr);grid-template-rows:1fr 1fr}
+  .gtile{position:relative;border-radius:.9vw;overflow:hidden;background:var(--card)}
+  .gtile img{width:100%;height:100%;object-fit:cover}
+  .gtile span{position:absolute;left:0;right:0;bottom:0;padding:1.4vh 1vw;font-size:.92vw;font-weight:600;background:linear-gradient(transparent,rgba(0,0,0,.85));z-index:2}
+  .gtile .tag{top:1vh;left:1vw;bottom:auto;right:auto;background:var(--grad);padding:.4vh .8vw;border-radius:999px;font-size:.8vw;font-family:'Sora',sans-serif;letter-spacing:.08em}
+
+  /* ---------- Service cards ---------- */
+  .serv{display:grid;grid-template-columns:repeat(3,1fr);gap:1.3vw;margin-top:3.5vh}
+  .scard{background:var(--card);border:1px solid var(--line);border-radius:1vw;padding:3vh 1.6vw}
+  .scard .ico{width:3vw;height:3vw;border-radius:.8vw;background:var(--grad-soft);display:flex;align-items:center;justify-content:center;font-size:1.6vw;margin-bottom:1.6vh}
+  .scard h3{font-size:1.4vw;font-weight:700;margin-bottom:.8vh}
+  .scard p{color:var(--muted);font-size:1.02vw;line-height:1.45}
+
+  /* ---------- End-to-end ---------- */
+  .e2e{display:grid;grid-template-columns:1.05fr 1fr;gap:3vw;align-items:center;height:100%;padding:5.2% 6%}
+  .e2e .steps{display:flex;flex-direction:column;gap:2.6vh}
+  .e2e .step{display:flex;gap:1.2vw;align-items:flex-start}
+  .e2e .step .n{flex:0 0 auto;width:2.4vw;height:2.4vw;border-radius:50%;background:var(--grad);display:flex;align-items:center;justify-content:center;font-family:'Sora',sans-serif;font-weight:800;font-size:1.1vw}
+  .e2e .step h4{font-family:'Sora',sans-serif;font-size:1.3vw;font-weight:800;letter-spacing:.02em}
+  .e2e .step p{color:var(--muted);font-size:1.05vw}
+  .diagram{background:var(--card);border:1px solid var(--line);border-radius:1.2vw;padding:3vh 2vw}
+  .plat{display:flex;flex-wrap:wrap;gap:.8vw;justify-content:center;margin-bottom:2.2vh}
+  .chip{background:#fff;color:#111;border-radius:.7vw;padding:1vh 1.2vw;font-family:'Sora',sans-serif;font-weight:800;font-size:1.1vw;display:flex;align-items:center;gap:.4vw}
+  .chip.tt{background:#111;color:#fff}
+  .arrowlbl{text-align:center;margin:1.4vh 0;font-family:'Sora',sans-serif;font-style:italic;font-weight:700;color:#fff;font-size:1.1vw}
+  .arrowlbl span{background:var(--grad);padding:.4vh 1vw;border-radius:.5vw}
+  .hub{background:var(--grad);border-radius:1vw;padding:2.4vh 1.6vw;display:flex;align-items:center;justify-content:space-between;gap:1vw}
+  .hub .me{background:#fff;color:#111;border-radius:50%;width:6vw;height:6vw;display:flex;align-items:center;justify-content:center;font-family:'Sora',sans-serif;font-weight:800;font-size:1vw;text-align:center;line-height:1.1}
+  .hub .flow{flex:1;text-align:center;color:#fff;font-family:'Sora',sans-serif;font-weight:700;font-size:1vw}
+  .hub .nodes{display:flex;gap:.6vw}
+  .hub .nodes div{background:rgba(255,255,255,.9);color:#111;border-radius:50%;width:3.6vw;height:3.6vw;display:flex;align-items:center;justify-content:center;font-size:.85vw;font-weight:700;font-family:'Sora',sans-serif}
+
+  /* ---------- Comparison ---------- */
+  .cmp{display:grid;grid-template-columns:1fr 1.15fr 1fr;gap:1.4vw;margin-top:3.5vh;align-items:stretch}
+  .col{background:var(--card);border:1px solid var(--line);border-radius:1.2vw;padding:3vh 1.7vw}
+  .col.win{background:var(--grad);border:0;transform:translateY(-1.4vh);box-shadow:0 2vh 5vh rgba(155,92,255,.3)}
+  .col .h{display:inline-block;background:#fff;color:#111;border-radius:999px;padding:.7vh 1.4vw;font-family:'Sora',sans-serif;font-weight:800;font-size:1.05vw;margin-bottom:2.4vh}
+  .col.win .h{background:rgba(255,255,255,.95)}
+  .col ul{list-style:none;display:flex;flex-direction:column;gap:1.6vh}
+  .col li{display:flex;gap:.8vw;font-size:1.02vw;line-height:1.4;color:var(--muted)}
+  .col.win li{color:#fff}
+  .col li::before{content:"✕";color:#ff6b6b;font-weight:800;flex:0 0 auto}
+  .col.win li::before{content:"✓";color:#fff}
+
+  /* ---------- Rate cards ---------- */
+  .plans{display:grid;grid-template-columns:repeat(3,1fr);gap:1.4vw;margin-top:3vh;align-items:start}
+  .plan{background:var(--card);border:1px solid var(--line);border-radius:1.2vw;padding:2.8vh 1.6vw;position:relative}
+  .plan.feat{border:1px solid transparent;background:linear-gradient(var(--card),var(--card)) padding-box,var(--grad) border-box;box-shadow:0 1.6vh 4vh rgba(155,92,255,.22)}
+  .plan .flag{position:absolute;top:-1.3vh;left:50%;transform:translateX(-50%);background:var(--grad);font-family:'Sora',sans-serif;font-weight:800;font-size:.8vw;letter-spacing:.12em;padding:.5vh 1.1vw;border-radius:999px;white-space:nowrap}
+  .plan .ty{font-family:'Sora',sans-serif;font-weight:800;letter-spacing:.14em;font-size:.85vw;color:var(--muted);text-transform:uppercase}
+  .plan h3{font-size:1.7vw;font-weight:700;margin:.3vh 0}
+  .plan .for{color:var(--muted);font-size:.95vw;margin-bottom:1.6vh}
+  .plan .price{font-family:'Sora',sans-serif;font-weight:800;font-size:2.5vw;line-height:1}
+  .plan .price small{font-size:1vw;color:var(--muted);font-weight:600}
+  .plan .unit{color:var(--muted);font-size:.95vw;margin:.6vh 0 1.6vh;padding-bottom:1.4vh;border-bottom:1px dashed var(--line)}
+  .plan ul{list-style:none;display:flex;flex-direction:column;gap:1vh}
+  .plan li{display:flex;gap:.7vw;font-size:1vw;align-items:flex-start;line-height:1.35}
+  .plan li::before{content:"✓";color:#3ddc84;font-weight:800;flex:0 0 auto}
+
+  /* ---------- Costing table ---------- */
+  .ctable{margin-top:3.5vh;width:100%;border-collapse:collapse;background:var(--grad-soft);border:1px solid var(--line);border-radius:1.2vw;overflow:hidden}
+  .ctable th,.ctable td{padding:2.4vh 1.4vw;text-align:center;font-size:1.25vw}
+  .ctable thead th{font-family:'Sora',sans-serif;font-weight:700;color:#fff;border-bottom:2px solid rgba(255,138,61,.6)}
+  .ctable tbody td{border-top:1px solid var(--line);color:#fff}
+  .ctable tbody tr td:first-child{font-family:'Sora',sans-serif;font-weight:700;color:var(--muted)}
+  .ctable .hi{font-family:'Sora',sans-serif;font-weight:800;font-size:1.5vw}
+  .ctable .off{color:#ff8a3d;font-weight:800;font-size:.95vw}
+  .cnote{text-align:center;color:var(--muted);font-size:1vw;margin-top:2.4vh}
+
+  /* ---------- Contact ---------- */
+  .contact .pad{z-index:2}
+  .contact h1{font-size:6vw;font-weight:800;line-height:1}
+  .clist{margin-top:5vh;align-self:flex-start;display:flex;flex-direction:column;gap:2.4vh;font-size:1.7vw;font-weight:600}
+  .clist a{color:#fff;text-decoration:none;display:flex;align-items:center;gap:1.2vw}
+  .clist .ic{width:3vw;height:3vw;border-radius:.8vw;background:var(--grad);display:flex;align-items:center;justify-content:center;font-size:1.4vw}
+  .clogo{height:5vh;width:auto;align-self:flex-start;margin-bottom:3vh}
+
+  /* ---------- Nav UI ---------- */
+  .ui{position:fixed;z-index:50;left:0;right:0;bottom:2.2vh;display:flex;justify-content:center;gap:.7vw;pointer-events:none}
+  .ui .dotnav{display:flex;gap:.55vw;pointer-events:auto;background:rgba(0,0,0,.45);backdrop-filter:blur(8px);padding:.9vh 1.2vw;border-radius:999px;border:1px solid var(--line)}
+  .ui .nd{width:.6vw;height:.6vw;border-radius:50%;background:rgba(255,255,255,.3);cursor:pointer;transition:.2s}
+  .ui .nd.on{background:#fff;width:1.8vw;border-radius:999px}
+  .arrow{position:fixed;z-index:50;top:50%;transform:translateY(-50%);width:3.4vw;height:3.4vw;border-radius:50%;background:rgba(0,0,0,.45);backdrop-filter:blur(8px);border:1px solid var(--line);color:#fff;font-size:1.4vw;display:flex;align-items:center;justify-content:center;cursor:pointer;user-select:none;transition:.2s}
+  .arrow:hover{background:rgba(255,255,255,.15)}
+  .arrow.prev{left:1.6vw}.arrow.next{right:1.6vw}
+  .hint{position:fixed;z-index:50;top:2vh;left:2vw;font-family:'Sora',sans-serif;font-size:.8vw;color:rgba(255,255,255,.4)}
+
+  @media(max-width:760px){
+    .wm b,.wm span,.pageno,.eyebrow{font-size:2.4vw}
+    .hint{display:none}
+  }
+</style>
+</head>
+<body>
+
+<div class="deck" id="deck">
+
+  <!-- 1 — COVER -->
+  <section class="slide cover">
+    <div class="stage">
+      <div class="bgimg"><img src="https://media.base44.com/images/public/6a1e7acf6631539abe61f1ef/de8b80c0f_43B15B39-965D-4FFC-85E9-6B4E26207270.jpg" alt="Live production" /></div>
+      <div class="pad center">
+        <img class="logo" src="https://yushi-marketing.com/wp-content/uploads/2024/07/YMT-logo-wh-1_white.png" alt="Yushi Marketing Technology" />
+        <span class="badge"><span class="dot"></span> LIVE STREAMING &amp; PRODUCTION</span>
+        <h1 class="dsp">Live <span class="grad-text">Vibe</span><br/>by Yushi</h1>
+        <div class="sub">Your Trusted Partner for Premium Live Commerce &amp; Event Streaming — ครบวงจรตั้งแต่งานพาเจนท์ระดับจังหวัด ถึง Live E-Commerce ยอดวิว 99,000+</div>
+      </div>
+      <div class="wm"><b>BUSINESS PROFILE</b><span>Private and confidential</span></div>
+    </div>
+  </section>
+
+  <!-- 2 — WHO WE ARE + STATS -->
+  <section class="slide">
+    <div class="stage">
+      <div class="glow g-tl"></div>
+      <div class="pad center">
+        <div class="eyebrow">Who We Are</div>
+        <h2 class="slide-title">ทีม Live Production<br/>มืออาชีพ <span class="grad-text">ครบวงจร</span></h2>
+        <div class="slide-sub">Yushi Marketing Technology — One Stop Live Commerce Solution. ผลิตงานไลฟ์ระดับ Broadcast พร้อมทีมงาน อุปกรณ์ และระบบครบในที่เดียว ไลฟ์ได้ทุกแพลตฟอร์ม Facebook · YouTube · TikTok</div>
+        <div class="stats">
+          <div class="stat"><div class="n grad-text">99K+</div><div class="l">Peak Viewers</div><div class="s">Fresh &amp; Soft campaign</div></div>
+          <div class="stat"><div class="n grad-text">10+</div><div class="l">Events Streamed</div><div class="s">Miss Grand &amp; brands</div></div>
+          <div class="stat"><div class="n grad-text">3</div><div class="l">Platforms</div><div class="s">FB · YT · TikTok</div></div>
+          <div class="stat"><div class="n grad-text">6</div><div class="l">Multi-Cam</div><div class="s">Up to 6 cameras</div></div>
+        </div>
+      </div>
+      <div class="wm"><b>BUSINESS PROFILE</b><span>Private and confidential</span></div>
+      <div class="pageno">02</div>
+    </div>
+  </section>
+
+  <!-- 3 — WHY CHOOSE US -->
+  <section class="slide">
+    <div class="stage">
+      <div class="two">
+        <div class="left">
+          <div class="glow g-tl"></div>
+          <div class="eyebrow it">Why brands choose us</div>
+          <h2 class="dsp" style="font-size:4.2vw;font-weight:800;margin-top:1.5vh">ทำไมต้อง<br/><span class="grad-text">LiveVibe</span></h2>
+          <p style="color:var(--muted);font-size:1.3vw;margin-top:2vh;max-width:30vw">ทีมเบื้องหลังที่เข้าใจทั้งภาพลักษณ์แบรนด์และผลลัพธ์ทางธุรกิจ — “โดดเด่นและขายได้จริง”</p>
+        </div>
+        <div class="left" style="padding-left:0">
+          <div class="points">
+            <div class="point"><div class="num">1</div><div><h3 class="th">ภาพลักษณ์ MC ที่โดดเด่น</h3><p>Hosts ที่มีเสน่ห์ มั่นใจ และพร้อมหน้ากล้อง — confident, elegant, totally camera-ready</p></div></div>
+            <div class="point"><div class="num">2</div><div><h3 class="th">ฉากไลฟ์พรีเมียมระดับท็อป</h3><p>Multi-cam, OB system, vMix/OBS switching ทำให้แบรนด์ดูพรีเมียมจนคนหยุดสกรอลล์</p></div></div>
+            <div class="point"><div class="num">3</div><div><h3 class="th">ทีมเบื้องหลังมืออาชีพ</h3><p>Director, Switcher, Audio engineer ที่เคยทำงานกับแบรนด์และงาน Production ระดับจังหวัด</p></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="wm"><b>BUSINESS PROFILE</b><span>Private and confidential</span></div>
+      <div class="pageno">03</div>
+    </div>
+  </section>
+
+  <!-- 4 — PAGEANT GALLERY -->
+  <section class="slide">
+    <div class="stage">
+      <div class="pad">
+        <div class="eyebrow it">Selected work · Pageant &amp; Event</div>
+        <h2 class="slide-title" style="font-size:3.2vw">Miss Grand Songkhla &amp; Satun 2026</h2>
+        <div class="gal g6">
+          <div class="gtile"><span class="tag">Multi-cam</span><img src="https://media.base44.com/images/public/6a1e7acf6631539abe61f1ef/c6fedab78_S__22298633.jpg" alt=""><span>Poolside runway — Signature Hotel Airport</span></div>
+          <div class="gtile"><img src="https://media.base44.com/images/public/6a1e7acf6631539abe61f1ef/45147dda3_615395828_3046716168833861_8966703759454775795_n_0.jpg" alt=""><span>Stage lighting rig — grand ballroom</span></div>
+          <div class="gtile"><img src="https://media.base44.com/images/public/6a1e7acf6631539abe61f1ef/839491fca_615763170_3045861492252662_1965282467758480151_n1.jpg" alt=""><span>Multi-camera angle — contestant walk</span></div>
+          <div class="gtile"><img src="https://media.base44.com/images/public/6a1e7acf6631539abe61f1ef/dbe4996a4_Screenshot2569-06-30at171007_0.png" alt=""><span>Live switching station — control room</span></div>
+          <div class="gtile"><img src="https://media.base44.com/images/public/6a1e7acf6631539abe61f1ef/50685ef22_615180319_3045063132332498_5379582830600952205_n1.jpg" alt=""><span>Audio console — FOH engineer</span></div>
+          <div class="gtile"><img src="https://media.base44.com/images/public/6a1e7acf6631539abe61f1ef/de8b80c0f_43B15B39-965D-4FFC-85E9-6B4E26207270.jpg" alt=""><span>Main stage LED wall — grand finale</span></div>
+        </div>
+      </div>
+      <div class="wm"><b>BUSINESS PROFILE</b><span>Private and confidential</span></div>
+      <div class="pageno">04</div>
+    </div>
+  </section>
+
+  <!-- 5 — LIVE COMMERCE GALLERY -->
+  <section class="slide">
+    <div class="stage">
+      <div class="pad">
+        <div class="eyebrow it">Selected work · Live E-Commerce</div>
+        <h2 class="slide-title" style="font-size:3.2vw">Fresh &amp; Soft · LYO · YaiLY — <span class="grad-text">99K viewers</span></h2>
+        <div class="gal g6">
+          <div class="gtile"><span class="tag">99K live</span><img src="https://media.base44.com/images/public/6a1e7acf6631539abe61f1ef/78aa9e47e_LINE_ALBUM_Live_260630_4.jpg" alt=""><span>Fresh &amp; Soft — 99K viewers live stream</span></div>
+          <div class="gtile"><img src="https://media.base44.com/images/public/6a1e7acf6631539abe61f1ef/dd4be3fe0_LINE_ALBUM_Live_260630_1.jpg" alt=""><span>LYO — live commerce with Miss Grand talent</span></div>
+          <div class="gtile"><img src="https://media.base44.com/images/public/6a1e7acf6631539abe61f1ef/223e636bc_LINE_ALBUM_Live_260630_6.jpg" alt=""><span>YaiLY — Miss Grand talent showcase</span></div>
+          <div class="gtile"><img src="https://media.base44.com/images/public/6a1e7acf6631539abe61f1ef/9739fdb5b_LINE_ALBUM_Live_260630_5.jpg" alt=""><span>Multi-camera live e-commerce production</span></div>
+          <div class="gtile"><img src="https://media.base44.com/images/public/6a1e7acf6631539abe61f1ef/a18ab5755_LINE_ALBUM_Live_260630_3.jpg" alt=""><span>Fresh &amp; Soft product campaign live</span></div>
+          <div class="gtile"><img src="https://media.base44.com/images/public/6a1e7acf6631539abe61f1ef/08a3bbb9c_F700B9BA-0958-4558-A86B-80C217D1495F.jpg" alt=""><span>Studio lighting setup — e-commerce shoot</span></div>
+        </div>
+      </div>
+      <div class="wm"><b>BUSINESS PROFILE</b><span>Private and confidential</span></div>
+      <div class="pageno">05</div>
+    </div>
+  </section>
+
+  <!-- 6 — OUR SERVICES -->
+  <section class="slide">
+    <div class="stage">
+      <div class="glow g-br"></div>
+      <div class="pad center">
+        <div class="eyebrow">What We Do</div>
+        <h2 class="slide-title">บริการ <span class="grad-text">Live Production</span></h2>
+        <div class="serv">
+          <div class="scard"><div class="ico">📡</div><h3>Event Live Streaming</h3><p>ถ่ายทอดสดงานอีเวนต์ พาเจนท์ คอนเสิร์ต และงาน Corporate — multi-platform</p></div>
+          <div class="scard"><div class="ico">🛍️</div><h3>Live E-Commerce</h3><p>ผลิตรายการ Live ขายสินค้าพร้อมทีมงานมืออาชีพ — กล้องหลายตัว แสง กราฟิก Director</p></div>
+          <div class="scard"><div class="ico">🎬</div><h3>Multi-Camera Production</h3><p>ระบบสลับกล้องหลายมุมด้วย vMix / OBS พร้อม Director ควบคุม real-time</p></div>
+          <div class="scard"><div class="ico">⚡</div><h3>Instant Replay &amp; Graphics</h3><p>ระบบ Replay ทันที และ Graphic Overlay สำหรับงานกีฬา พาเจนท์ และ Corporate</p></div>
+          <div class="scard"><div class="ico">🎤</div><h3>Talent + Presenter</h3><p>จัดหา Presenter และ KOL ทำงานร่วมกับทีม Live เพื่อเพิ่มยอดขายและ engagement</p></div>
+          <div class="scard"><div class="ico">🎛️</div><h3>Full Production Package</h3><p>ครบครัน — เวที แสง เสียง กล้อง Live Streaming และทีม Production ในที่เดียว</p></div>
+        </div>
+      </div>
+      <div class="wm"><b>BUSINESS PROFILE</b><span>Private and confidential</span></div>
+      <div class="pageno">06</div>
+    </div>
+  </section>
+
+  <!-- 7 — END TO END -->
+  <section class="slide">
+    <div class="stage">
+      <div class="e2e">
+        <div>
+          <h2 class="dsp" style="font-size:3.6vw;font-weight:800">เราดูแลให้หมด<br/><span class="grad-text">ครบวงจร</span></h2>
+          <div class="steps" style="margin-top:3.5vh">
+            <div class="step"><div class="n">1</div><div><h4>STORE MANAGEMENT</h4><p>ดูแลร้านค้าบน Marketplace ให้พร้อมก่อนการไลฟ์</p></div></div>
+            <div class="step"><div class="n">2</div><div><h4>BRAND STRATEGY FOR LIVE</h4><p>กำหนดทิศทางแบรนด์ เลือกสินค้าที่เหมาะสม สร้าง Branding ระยะยาว</p></div></div>
+            <div class="step"><div class="n">3</div><div><h4>LIVE STREAMING</h4><p>Official Live Streaming — เพียงส่งสินค้ามาให้เรา</p></div></div>
+            <div class="step"><div class="n">4</div><div><h4>PAID ADVERTISING</h4><p>Live Ads management โดยทีม certified</p></div></div>
+          </div>
+        </div>
+        <div class="diagram">
+          <div class="plat">
+            <div class="chip tt">◆ TikTok</div>
+            <div class="chip">▦ Lazada</div>
+            <div class="chip">🛒 Shopee</div>
+          </div>
+          <div class="arrowlbl"><span>⇅ Integration</span></div>
+          <div class="hub">
+            <div class="me">LiveVibe<br/>by Yushi</div>
+            <div class="flow">Live commerce →<br/>← Affiliate marketing</div>
+            <div class="nodes"><div>KOL</div><div>MCs</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="wm"><b>BUSINESS PROFILE</b><span>Private and confidential</span></div>
+      <div class="pageno">07</div>
+    </div>
+  </section>
+
+  <!-- 8 — COMPARISON -->
+  <section class="slide">
+    <div class="stage">
+      <div class="pad center">
+        <h2 class="dsp" style="font-size:3vw;font-weight:800;text-align:center">ให้ <span class="grad-text">LiveVibe</span> ดูแล มีประสิทธิภาพกว่าทำเอง</h2>
+        <div class="cmp">
+          <div class="col">
+            <div class="h">LIVE AGENCY ทั่วไป</div>
+            <ul>
+              <li>ไลฟ์โดยไม่มีเป้าหมายด้านผลลัพธ์</li>
+              <li>ใช้ MC ทั่วไปที่ไม่เข้ากับแบรนด์</li>
+              <li>ไม่สามารถสร้างคุณค่าให้แบรนด์ระยะยาว</li>
+            </ul>
+          </div>
+          <div class="col win">
+            <div class="h">LiveVibe by Yushi</div>
+            <ul>
+              <li>Scalable live session ไม่จำกัดชั่วโมง พร้อมทีมบริการจัดการ</li>
+              <li>MC มีประสบการณ์ คัดเลือกให้เหมาะกับภาพลักษณ์แบรนด์</li>
+              <li>มี Shortcut และเทคนิคในการสร้างยอดขายจริง</li>
+              <li>แชร์ Insights ให้แบรนด์โดยตรง เน้นผลลัพธ์จริง</li>
+            </ul>
+          </div>
+          <div class="col">
+            <div class="h">IN-HOUSE</div>
+            <ul>
+              <li>ต้นทุนลงทุนสูง ทั้งอุปกรณ์และการอบรมบุคลากร</li>
+              <li>ทีมภายในต้องทำทุกอย่างเอง ทำให้ขาดโฟกัส</li>
+              <li>ข้อจำกัดด้านความรู้ เรียนรู้ได้จากแบรนด์ตัวเองเท่านั้น</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="wm"><b>BUSINESS PROFILE</b><span>Private and confidential</span></div>
+      <div class="pageno">08</div>
+    </div>
+  </section>
+
+  <!-- 9 — RATE CARD -->
+  <section class="slide">
+    <div class="stage">
+      <div class="glow g-tl"></div>
+      <div class="pad center">
+        <div class="eyebrow">Rate Card</div>
+        <h2 class="slide-title" style="font-size:3vw">Live Streaming Service <span class="grad-text">Rate Card</span></h2>
+        <div class="plans">
+          <div class="plan">
+            <div class="ty">Standard</div><h3>Standard</h3><div class="for">งานเล็ก / ไลฟ์สั้น 1–2 ชม.</div>
+            <div class="price">11,990 <small>฿</small></div>
+            <div class="unit">เพิ่มชั่วโมงละ 3,000 ฿ · เพิ่มกล้อง 1,800 ฿/ตัว</div>
+            <ul>
+              <li>2 กล้อง Mirrorless</li>
+              <li>ไฟ + ระบบเสียง Full Stream</li>
+              <li>ระบบ OB · Free Internet</li>
+              <li>ไลฟ์ได้ 1 Platform</li>
+            </ul>
+          </div>
+          <div class="plan feat">
+            <div class="flag">★ BEST VALUE</div>
+            <div class="ty">Pro</div><h3>Pro</h3><div class="for">คุ้มที่สุด / 10 ชม. แบ่งใช้ได้</div>
+            <div class="price">53,990 <small>฿</small></div>
+            <div class="unit">เหมาชั่วโมง ลดสูงสุด -15% · ใช้งานได้หลายครั้ง</div>
+            <ul>
+              <li>20 ชม. — 102,900 ฿ <b style="color:#ff8a3d">(-5%)</b></li>
+              <li>30 ชม. — 150,900 ฿ <b style="color:#ff8a3d">(-7%)</b></li>
+              <li>50 ชม. — 242,900 ฿ <b style="color:#ff8a3d">(-10%)</b></li>
+              <li>100 ชม. — 458,900 ฿ <b style="color:#ff8a3d">(-15%)</b></li>
+            </ul>
+          </div>
+          <div class="plan">
+            <div class="ty">MOU · Enterprise</div><h3>MOU</h3><div class="for">องค์กร / ระยะยาว 150+ ชม.</div>
+            <div class="price"><small>เริ่มต้น</small> 599,000 <small>฿</small></div>
+            <div class="unit">ลด 25% + แถมชุดอุปกรณ์ไลฟ์ฟรี 1 ชุด</div>
+            <ul>
+              <li>กล้อง Canon M50 Mark II</li>
+              <li>ไฟต่อเนื่อง 2 ชุด + ขาตั้ง</li>
+              <li>ไมค์ไร้สาย 1 ชุด (2 ตัว)</li>
+              <li>Backdrop + ฉากเขียว</li>
+            </ul>
+          </div>
+        </div>
+        <div class="cnote">* ราคายังไม่รวม VAT 7% · Add-on: เฟรม/Backdrop เริ่ม 900 ฿ · MC 3,000–12,000 ฿ · Multi-platform +1,200 ฿/platform</div>
+      </div>
+      <div class="wm"><b>BUSINESS PROFILE</b><span>Private and confidential</span></div>
+      <div class="pageno">09</div>
+    </div>
+  </section>
+
+  <!-- 10 — COSTING TABLE -->
+  <section class="slide">
+    <div class="stage">
+      <div class="glow g-br"></div>
+      <div class="pad center">
+        <h2 class="dsp" style="font-size:3.4vw;font-weight:800">COSTING <span class="grad-text">BULK-HOUR PACKAGE</span></h2>
+        <table class="ctable">
+          <thead>
+            <tr><th style="text-align:left">Live hours</th><th>ราคารวม (THB)</th><th>เฉลี่ย/ชม.</th><th>ส่วนลด</th></tr>
+          </thead>
+          <tbody>
+            <tr><td style="text-align:left">10 ชั่วโมง</td><td class="hi">53,990</td><td>5,399 ฿</td><td>—</td></tr>
+            <tr><td style="text-align:left">20 ชั่วโมง</td><td class="hi">102,900</td><td>5,145 ฿</td><td class="off">-5%</td></tr>
+            <tr><td style="text-align:left">30 ชั่วโมง</td><td class="hi">150,900</td><td>5,030 ฿</td><td class="off">-7%</td></tr>
+            <tr><td style="text-align:left">50 ชั่วโมง</td><td class="hi">242,900</td><td>4,858 ฿</td><td class="off">-10%</td></tr>
+            <tr><td style="text-align:left">100 ชั่วโมง</td><td class="hi">458,900</td><td>4,589 ฿</td><td class="off">-15%</td></tr>
+            <tr><td style="text-align:left">150+ ชม. (MOU)</td><td class="hi">เริ่ม 599,000</td><td>ต่ำสุด</td><td class="off">-25% + อุปกรณ์ฟรี</td></tr>
+          </tbody>
+        </table>
+        <div class="cnote">ยิ่งเหมาชั่วโมงมาก ยิ่งประหยัด — แบ่งชั่วโมงใช้งานได้หลายครั้ง · ราคายังไม่รวม VAT 7%</div>
+      </div>
+      <div class="wm"><b>BUSINESS PROFILE</b><span>Private and confidential</span></div>
+      <div class="pageno">10</div>
+    </div>
+  </section>
+
+  <!-- 11 — CONTACT -->
+  <section class="slide contact">
+    <div class="stage">
+      <div class="glow g-tl"></div><div class="glow g-br"></div>
+      <div class="pad center">
+        <img class="clogo" src="https://yushi-marketing.com/wp-content/uploads/2024/07/YMT-logo-wh-1_white.png" alt="Yushi Marketing Technology" />
+        <h1 class="dsp">CONTACT <span class="grad-text">LiveVibe</span></h1>
+        <div class="clist">
+          <a href="tel:+66661515659"><span class="ic">📞</span> 066-151-5659</a>
+          <a href="https://line.me/R/ti/p/@ymtagency" target="_blank" rel="noopener"><span class="ic">💬</span> LINE Official — @ymtagency</a>
+          <a href="https://yushi-marketing.com" target="_blank" rel="noopener"><span class="ic">🌐</span> yushi-marketing.com</a>
+        </div>
+      </div>
+      <div class="wm"><b>BUSINESS PROFILE</b><span>Private and confidential</span></div>
+      <div class="pageno">11</div>
+    </div>
+  </section>
+
+</div>
+
+<!-- NAV UI -->
+<div class="arrow prev" id="prev">‹</div>
+<div class="arrow next" id="next">›</div>
+<div class="ui"><div class="dotnav" id="dots"></div></div>
+<div class="hint">← → to navigate · F for fullscreen</div>
+
+<script>
+  const deck=document.getElementById('deck');
+  const slides=[...deck.querySelectorAll('.slide')];
+  // feature the YMT logo in the top-right corner of every slide (cover already has the hero logo)
+  const LOGO='https://yushi-marketing.com/wp-content/uploads/2024/07/YMT-logo-wh-1_white.png';
+  deck.querySelectorAll('.slide:not(.cover) .stage').forEach(st=>{const l=new Image();l.src=LOGO;l.className='cornerlogo';l.alt='Yushi Marketing Technology';st.appendChild(l);});
+  const dots=document.getElementById('dots');
+  let cur=0;
+  slides.forEach((s,i)=>{const d=document.createElement('div');d.className='nd'+(i===0?' on':'');d.onclick=()=>go(i);dots.appendChild(d);});
+  const nds=[...dots.children];
+  function go(i){cur=Math.max(0,Math.min(slides.length-1,i));deck.scrollTo({left:cur*window.innerWidth,behavior:'smooth'});update();}
+  function update(){nds.forEach((d,i)=>d.classList.toggle('on',i===cur));}
+  document.getElementById('prev').onclick=()=>go(cur-1);
+  document.getElementById('next').onclick=()=>go(cur+1);
+  // keep cur in sync when user scrolls/swipes
+  let t;deck.addEventListener('scroll',()=>{clearTimeout(t);t=setTimeout(()=>{cur=Math.round(deck.scrollLeft/window.innerWidth);update();},80);});
+  window.addEventListener('keydown',e=>{
+    if(['ArrowRight','PageDown',' '].includes(e.key)){e.preventDefault();go(cur+1);}
+    else if(['ArrowLeft','PageUp'].includes(e.key)){e.preventDefault();go(cur-1);}
+    else if(e.key==='Home'){go(0);} else if(e.key==='End'){go(slides.length-1);}
+    else if(e.key==='f'||e.key==='F'){if(!document.fullscreenElement)document.documentElement.requestFullscreen();else document.exitFullscreen();}
+  });
+  window.addEventListener('resize',()=>deck.scrollTo({left:cur*window.innerWidth}));
+</script>
+</body>
+</html>

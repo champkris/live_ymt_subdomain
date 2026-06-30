@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Live Streaming & Production | Yushi Marketing Technology</title>
+<meta name="description" content="บริการ Live Streaming & Production ครบวงจรโดย Yushi Marketing Technology — ถ่ายทอดสดงานอีเวนต์ พาเจนท์ และ Live E-Commerce ยอดวิวสูงถึง 99,000 คน" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@400;500;600;700&family=Sora:wght@400;600;700;800&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --bg:#0a0a0d;
+    --bg-2:#101015;
+    --card:#16161d;
+    --card-2:#1c1c25;
+    --line:rgba(255,255,255,.08);
+    --txt:#f4f4f6;
+    --muted:#9a9aa6;
+    --grad:linear-gradient(120deg,#4f7cff 0%,#9b5cff 35%,#ff5ca8 68%,#ff8a3d 100%);
+    --grad-soft:linear-gradient(120deg,rgba(79,124,255,.18),rgba(255,92,168,.18),rgba(255,138,61,.18));
+    --radius:18px;
+    --maxw:1180px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--bg);
+    color:var(--txt);
+    font-family:'Noto Sans Thai','Sora',system-ui,sans-serif;
+    line-height:1.6;
+    overflow-x:hidden;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,.display{font-family:'Sora','Noto Sans Thai',sans-serif;line-height:1.08;letter-spacing:-.02em}
+  a{color:inherit;text-decoration:none}
+  img{display:block;max-width:100%}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 22px}
+  .grad-text{background:var(--grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent}
+  .eyebrow{font-family:'Sora',sans-serif;font-size:.78rem;letter-spacing:.32em;text-transform:uppercase;color:var(--muted);font-weight:600}
+
+  /* ---------- Nav ---------- */
+  header{position:sticky;top:0;z-index:50;backdrop-filter:blur(14px);background:rgba(10,10,13,.72);border-bottom:1px solid var(--line)}
+  .nav{display:flex;align-items:center;justify-content:space-between;height:74px}
+  .nav img{height:56px;width:auto}
+  .nav-links{display:flex;gap:30px;align-items:center}
+  .nav-links a{font-size:.92rem;color:var(--muted);font-weight:500;transition:.2s}
+  .nav-links a:hover{color:#fff}
+  .btn{display:inline-flex;align-items:center;gap:9px;font-family:'Sora',sans-serif;font-weight:700;font-size:.95rem;padding:13px 24px;border-radius:999px;cursor:pointer;border:0;transition:transform .15s ease,box-shadow .2s ease}
+  .btn-grad{background:var(--grad);color:#fff;box-shadow:0 8px 26px rgba(155,92,255,.35)}
+  .btn-grad:hover{transform:translateY(-2px);box-shadow:0 12px 34px rgba(155,92,255,.5)}
+  .btn-ghost{background:rgba(255,255,255,.06);color:#fff;border:1px solid var(--line)}
+  .btn-ghost:hover{background:rgba(255,255,255,.12)}
+  .nav .btn{padding:10px 20px}
+  .live-dot{width:8px;height:8px;border-radius:50%;background:#ff4d4d;box-shadow:0 0 0 0 rgba(255,77,77,.6);animation:pulse 1.6s infinite}
+  @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(255,77,77,.55)}70%{box-shadow:0 0 0 9px rgba(255,77,77,0)}100%{box-shadow:0 0 0 0 rgba(255,77,77,0)}}
+
+  /* ---------- Hero ---------- */
+  .hero{position:relative;min-height:88vh;display:flex;align-items:center;overflow:hidden}
+  .hero-bg{position:absolute;inset:0;z-index:0}
+  .hero-bg img{width:100%;height:100%;object-fit:cover;opacity:.32}
+  .hero-bg::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,var(--bg) 12%,rgba(10,10,13,.65) 55%,rgba(10,10,13,.4));}
+  .hero-glow{position:absolute;top:-20%;right:-10%;width:60vw;height:60vw;background:var(--grad);filter:blur(140px);opacity:.22;border-radius:50%;z-index:0;pointer-events:none}
+  .hero .wrap{position:relative;z-index:2;width:100%}
+  .badge-live{display:inline-flex;align-items:center;gap:9px;padding:8px 16px;border-radius:999px;border:1px solid var(--line);background:rgba(255,255,255,.04);font-family:'Sora',sans-serif;font-weight:700;font-size:.8rem;letter-spacing:.12em;margin-bottom:26px}
+  .hero h1{font-size:clamp(2.8rem,7vw,5.3rem);font-weight:800;margin-bottom:22px}
+  .hero p{font-size:clamp(1rem,1.6vw,1.18rem);color:var(--muted);max-width:560px;margin-bottom:34px}
+  .hero-cta{display:flex;gap:14px;flex-wrap:wrap}
+  .topband{position:absolute;top:26px;right:26px;z-index:3;display:inline-flex;align-items:center;gap:8px;padding:8px 16px;border-radius:999px;background:rgba(255,77,77,.15);border:1px solid rgba(255,77,77,.4);font-family:'Sora',sans-serif;font-weight:800;font-size:.78rem;letter-spacing:.18em}
+
+  /* ---------- Stats ---------- */
+  .stats{border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:var(--bg-2)}
+  .stats-grid{display:grid;grid-template-columns:repeat(4,1fr)}
+  .stat{padding:38px 22px;text-align:center;border-right:1px solid var(--line)}
+  .stat:last-child{border-right:0}
+  .stat .num{font-family:'Sora',sans-serif;font-weight:800;font-size:clamp(2rem,4vw,2.8rem);line-height:1}
+  .stat .lbl{color:#fff;font-weight:600;margin-top:8px}
+  .stat .sub{color:var(--muted);font-size:.85rem}
+
+  /* ---------- Sections ---------- */
+  section{padding:92px 0}
+  .sec-head{max-width:620px;margin-bottom:48px}
+  .sec-head h2{font-size:clamp(2rem,4vw,3rem);font-weight:800;margin:14px 0}
+  .sec-head p{color:var(--muted);font-size:1.05rem}
+
+  /* ---------- Featured highlight ---------- */
+  .feat{display:grid;grid-template-columns:1.4fr 1fr;gap:18px}
+  .feat-main{position:relative;border-radius:var(--radius);overflow:hidden;min-height:420px}
+  .feat-main img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0}
+  .feat-main .cap{position:absolute;left:0;right:0;bottom:0;padding:30px;background:linear-gradient(transparent,rgba(0,0,0,.85));z-index:2}
+  .feat-main .cap h3{font-size:1.7rem;font-weight:700}
+  .feat-main .cap span{color:var(--muted)}
+  .feat-side{display:grid;grid-template-rows:1fr 1fr;gap:18px}
+  .feat-side .cell{position:relative;border-radius:var(--radius);overflow:hidden}
+  .feat-side .cell img{width:100%;height:100%;object-fit:cover;min-height:200px}
+  .feat-side .cell span{position:absolute;left:0;right:0;bottom:0;padding:16px 18px;font-size:.85rem;font-weight:600;background:linear-gradient(transparent,rgba(0,0,0,.8));z-index:2}
+
+  /* ---------- Gallery ---------- */
+  .gallery{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+  .tile{position:relative;border-radius:14px;overflow:hidden;aspect-ratio:4/3;background:var(--card)}
+  .tile img{width:100%;height:100%;object-fit:cover;transition:transform .5s ease}
+  .tile:hover img{transform:scale(1.07)}
+  .tile .ov{position:absolute;inset:0;display:flex;align-items:flex-end;padding:14px;background:linear-gradient(transparent 45%,rgba(0,0,0,.82));opacity:0;transition:.3s;z-index:2}
+  .tile:hover .ov{opacity:1}
+  .tile .ov span{font-size:.8rem;font-weight:600;line-height:1.3}
+  .tile.tall{aspect-ratio:auto}
+
+  /* ---------- Services ---------- */
+  .serv-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  .serv{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:30px;transition:.25s}
+  .serv:hover{transform:translateY(-4px);border-color:rgba(255,255,255,.18);background:var(--card-2)}
+  .serv .ico{width:50px;height:50px;border-radius:13px;background:var(--grad-soft);display:flex;align-items:center;justify-content:center;font-size:1.5rem;margin-bottom:18px}
+  .serv h3{font-size:1.22rem;font-weight:700;margin-bottom:10px}
+  .serv p{color:var(--muted);font-size:.95rem}
+
+  /* ---------- Rate card ---------- */
+  #rates{background:var(--bg-2)}
+  .price-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;align-items:start}
+  .plan{position:relative;background:var(--card);border:1px solid var(--line);border-radius:22px;padding:32px 28px;display:flex;flex-direction:column;height:100%}
+  .plan.featured{border:1px solid transparent;background:
+     linear-gradient(var(--card),var(--card)) padding-box,
+     var(--grad) border-box;
+     box-shadow:0 24px 60px rgba(155,92,255,.22);transform:translateY(-8px)}
+  .plan .flag{position:absolute;top:-13px;left:50%;transform:translateX(-50%);background:var(--grad);color:#fff;font-family:'Sora',sans-serif;font-weight:800;font-size:.72rem;letter-spacing:.14em;padding:6px 16px;border-radius:999px;white-space:nowrap}
+  .plan .ptype{font-family:'Sora',sans-serif;font-weight:800;letter-spacing:.16em;font-size:.72rem;color:var(--muted);text-transform:uppercase}
+  .plan h3{font-size:1.5rem;font-weight:700;margin:6px 0 2px}
+  .plan .for{color:var(--muted);font-size:.9rem;margin-bottom:20px}
+  .plan .price{font-family:'Sora',sans-serif;font-weight:800;font-size:2.5rem;line-height:1}
+  .plan .price small{font-size:1rem;font-weight:600;color:var(--muted)}
+  .plan .unit{color:var(--muted);font-size:.92rem;margin:6px 0 4px}
+  .plan .note{font-size:.82rem;color:var(--muted);padding:8px 0;border-bottom:1px dashed var(--line);margin-bottom:14px}
+  .tiers{display:flex;flex-direction:column;gap:8px;margin:6px 0 16px}
+  .tier{display:flex;justify-content:space-between;align-items:center;background:rgba(255,255,255,.03);border:1px solid var(--line);border-radius:11px;padding:9px 13px;font-size:.9rem}
+  .tier b{font-family:'Sora',sans-serif}
+  .tier .off{background:var(--grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;font-weight:800;font-size:.78rem}
+  .feat-list{list-style:none;display:flex;flex-direction:column;gap:10px;margin:4px 0 18px}
+  .feat-list li{display:flex;gap:10px;font-size:.92rem;align-items:flex-start}
+  .feat-list li::before{content:"✓";color:#3ddc84;font-weight:800;flex:0 0 auto}
+  .sub-h{font-family:'Sora',sans-serif;font-weight:800;font-size:.7rem;letter-spacing:.14em;color:var(--muted);text-transform:uppercase;margin:6px 0 8px}
+  .addon{list-style:none;display:flex;flex-direction:column;gap:7px;margin-bottom:22px}
+  .addon li{font-size:.85rem;color:var(--muted);display:flex;gap:8px}
+  .addon li::before{content:"+";color:#ff8a3d;font-weight:800}
+  .gift{background:var(--grad-soft);border:1px solid var(--line);border-radius:14px;padding:16px;margin:6px 0 16px}
+  .gift .gh{font-weight:700;margin-bottom:8px;font-size:.95rem}
+  .gift ul{list-style:none;display:flex;flex-direction:column;gap:6px}
+  .gift li{font-size:.85rem;color:var(--muted);display:flex;gap:8px}
+  .gift li::before{content:"🎁";font-size:.8rem}
+  .plan .btn{margin-top:auto;width:100%;justify-content:center}
+
+  /* ---------- CTA ---------- */
+  .cta{position:relative;text-align:center;overflow:hidden}
+  .cta .glow{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:70vw;height:40vw;background:var(--grad);filter:blur(150px);opacity:.18;border-radius:50%;z-index:0}
+  .cta .wrap{position:relative;z-index:2}
+  .cta h2{font-size:clamp(2.2rem,5vw,3.6rem);font-weight:800;margin-bottom:18px}
+  .cta p{color:var(--muted);max-width:560px;margin:0 auto 32px;font-size:1.08rem}
+  .cta-btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+
+  /* ---------- Footer ---------- */
+  footer{border-top:1px solid var(--line);background:var(--bg-2);padding:54px 0 34px}
+  .foot{display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:34px;margin-bottom:34px}
+  footer img.flogo{height:58px;margin-bottom:16px}
+  footer p{color:var(--muted);font-size:.92rem;max-width:330px}
+  .foot h4{font-family:'Sora',sans-serif;font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;color:#fff;margin-bottom:14px}
+  .foot a{display:block;color:var(--muted);font-size:.92rem;margin-bottom:9px;transition:.2s}
+  .foot a:hover{color:#fff}
+  .copy{border-top:1px solid var(--line);padding-top:24px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;color:var(--muted);font-size:.82rem}
+  .powered{opacity:.7}
+
+  /* ---------- Responsive ---------- */
+  @media(max-width:900px){
+    .nav-links{display:none}
+    .stats-grid{grid-template-columns:repeat(2,1fr)}
+    .stat:nth-child(2n){border-right:0}
+    .stat{border-bottom:1px solid var(--line)}
+    .feat{grid-template-columns:1fr}
+    .gallery{grid-template-columns:repeat(2,1fr)}
+    .serv-grid{grid-template-columns:1fr}
+    .price-grid{grid-template-columns:1fr}
+    .plan.featured{transform:none}
+    .foot{grid-template-columns:1fr 1fr}
+    .foot .brandcol{grid-column:1/-1}
+  }
+  @media(max-width:520px){
+    .gallery{grid-template-columns:1fr 1fr}
+    section{padding:64px 0}
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<header>
+  <div class="wrap nav">
+    <a href="#top"><img src="https://yushi-marketing.com/wp-content/uploads/2024/07/YMT-logo-wh-1_white.png" alt="Yushi Marketing Technology" /></a>
+    <nav class="nav-links">
+      <a href="#work">ผลงาน</a>
+      <a href="#services">บริการ</a>
+      <a href="#rates">Rate Card</a>
+      <a href="#contact">ติดต่อ</a>
+    </nav>
+    <a class="btn btn-grad" href="#contact"><span class="live-dot"></span> จองงาน Live</a>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero" id="top">
+  <div class="hero-bg">
+    <img src="https://media.base44.com/images/public/6a1e7acf6631539abe61f1ef/c04ca459b_615474693_3047084965463648_6490727637383745516_n_0.jpg" alt="Grand finale night — live production" />
+  </div>
+  <div class="hero-glow"></div>
+  <div class="topband"><span class="live-dot"></span> ON AIR</div>
+  <div class="wrap">
+    <div class="badge-live"><span class="live-dot"></span> YUSHI LIVE PRODUCTION</div>
+    <h1>Live Streaming<br /><span class="grad-text">& Production</span></h1>
+    <p>ทีม Live Production มืออาชีพของ Yushi Marketing Technology — ครบทุกรูปแบบ ตั้งแต่ถ่ายทอดสดงานพาเจนท์ระดับจังหวัด ไปจนถึง Live E-Commerce ที่ยอดวิวสูงถึง 99,000 คน</p>
+    <div class="hero-cta">
+      <a class="btn btn-grad" href="#rates">ดู Rate Card</a>
+      <a class="btn btn-ghost" href="#work">ชมผลงาน →</a>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats">
+  <div class="wrap">
+    <div class="stats-grid">
+      <div class="stat"><div class="num grad-text">99K+</div><div class="lbl">Peak Viewers</div><div class="sub">Fresh & Soft campaign</div></div>
+      <div class="stat"><div class="num grad-text">10+</div><div class="lbl">Events Streamed</div><div class="sub">Miss Grand & brands</div></div>
+      <div class="stat"><div class="num grad-text">3</div><div class="lbl">Platforms</div><div class="sub">FB · YT · TikTok</div></div>
+      <div class="stat"><div class="num grad-text">6</div><div class="lbl">Multi-Cam Setup</div><div class="sub">Up to 6 cameras</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- FEATURED -->
+<section id="work">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">Highlight Reel</div>
+      <h2>Miss Grand Songkhla & Satun 2026</h2>
+      <p>ถ่ายทอดสดเต็มรูปแบบ — Signature Hotel Airport · หลายกล้อง · Director + Switcher + Audio</p>
+    </div>
+    <div class="feat">
+      <div class="feat-main">
+        <img src="https://media.base44.com/images/public/6a1e7acf6631539abe61f1ef/de8b80c0f_43B15B39-965D-4FFC-85E9-6B4E26207270.jpg" alt="Main stage LED wall — Miss Grand grand finale" />
+        <div class="cap"><h3>Main Stage · Grand Finale</h3><span>Signature Hotel Airport — full multi-cam production</span></div>
+      </div>
+      <div class="feat-side">
+        <div class="cell">
+          <img src="https://media.base44.com/images/public/6a1e7acf6631539abe61f1ef/dbe4996a4_Screenshot2569-06-30at171007_0.png" alt="Live switching station — multi-cam control" />
+          <span>Live switching station — multi-cam control</span>
+        </div>
+        <div class="cell">
+          <img src="https://media.base44.com/images/public/6a1e7acf6631539abe61f1ef/9064a2ac9_Screenshot2569-06-30at171015_0.png" alt="OBS / vMix production setup" />
+          <span>OBS / vMix production setup</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PAGEANT GALLERY -->
+<section style="padding-top:0">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">Pageant & Event</div>
+      <h2>งาน Miss Grand Songkhla & Satun 2026</h2>
+      <p>ถ่ายทอดสดเต็มรูปแบบ พร้อมทีม Production มืออาชีพ — Director, Switcher, ระบบเสียง และกล้องหลายมุม</p>
+    </div>
+    <div class="gallery">
+      <div class="tile"><img src="https://media.base44.com/images/public/6a1e7acf6631539abe61f1ef/bfff726af_Screenshot2569-06-30at171045_0.png" alt="On-site camera operator — Canon lens" /><div class="ov"><span>On-site camera operator — Canon lens</span></div></div>
+      <div class="tile"><img src="https://media.base44.com/images/public/6a1e7acf6631539abe61f1ef/f4e93e16c_Screenshot2569-06-30at171136_0.png" alt="Director coordinating multi-angle shoot" /><div class="ov"><span>Director coordinating multi-angle shoot</span></div></div>
+      <div class="tile"><img src="https://media.base44.com/images/public/6a1e7acf6631539abe61f1ef/c6fedab78_S__22298633.jpg" alt="Poolside runway — Miss Grand Songkhla & Satun" /><div class="ov"><span>Poolside runway — Miss Grand Songkhla & Satun</span></div></div>
+      <div class="tile"><img src="https://media.base44.com/images/public/6a1e7acf6631539abe61f1ef/506790c7e_616160550_3045693628936115_6272683986833914468_n1.jpg" alt="Catwalk production — poolside stage" /><div class="ov"><span>Catwalk production — poolside stage</span></div></div>
+      <div class="tile"><img src="https://media.base44.com/images/public/6a1e7acf6631539abe61f1ef/839491fca_615763170_3045861492252662_1965282467758480151_n1.jpg" alt="Multi-camera angle — contestant walk" /><div class="ov"><span>Multi-camera angle — contestant walk</span></div></div>
+      <div class="tile"><img src="https://media.base44.com/images/public/6a1e7acf6631539abe61f1ef/45147dda3_615395828_3046716168833861_8966703759454775795_n_0.jpg" alt="Stage lighting rig — grand ballroom" /><div class="ov"><span>Stage lighting rig — grand ballroom</span></div></div>
+      <div class="tile"><img src="https://media.base44.com/images/public/6a1e7acf6631539abe61f1ef/50685ef22_615180319_3045063132332498_5379582830600952205_n1.jpg" alt="Audio console setup — FOH engineer" /><div class="ov"><span>Audio console setup — FOH engineer</span></div></div>
+      <div class="tile"><img src="https://media.base44.com/images/public/6a1e7acf6631539abe61f1ef/894998813_615444491_3045861535585991_5347519486540751673_n1.jpg" alt="Night rehearsal — outdoor stage rig" /><div class="ov"><span>Night rehearsal — outdoor stage rig</span></div></div>
+      <div class="tile"><img src="https://media.base44.com/images/public/6a1e7acf6631539abe61f1ef/788ff38a7_IMG_4517.jpg" alt="Behind the lens — DSLR live music session" /><div class="ov"><span>Behind the lens — DSLR live music session</span></div></div>
+      <div class="tile"><img src="https://media.base44.com/images/public/6a1e7acf6631539abe61f1ef/a2229e212_S__11362316_0.jpg" alt="Live production crew — full team" /><div class="ov"><span>Live production crew — full team</span></div></div>
+      <div class="tile"><img src="https://media.base44.com/images/public/6a1e7acf6631539abe61f1ef/ab898d052_S__11362315_0.jpg" alt="Technical control station — multi-monitor OB" /><div class="ov"><span>Technical control station — multi-monitor OB</span></div></div>
+      <div class="tile"><img src="https://media.base44.com/images/public/6a1e7acf6631539abe61f1ef/47b0fc025_S__11362317_0.jpg" alt="Professional camera & production desk" /><div class="ov"><span>Professional camera & production desk</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- LIVE COMMERCE GALLERY -->
+<section style="padding-top:0">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">Live E-Commerce</div>
+      <h2>Live Commerce Production</h2>
+      <p>Fresh & Soft, LYO, YaiLY และแบรนด์ชั้นนำ — ผลิต Live ขายสินค้าพร้อม Talent Miss Grand ยอดวิวทะลุ 99,000 คน</p>
+    </div>
+    <div class="gallery">
+      <div class="tile"><img src="https://media.base44.com/images/public/6a1e7acf6631539abe61f1ef/78aa9e47e_LINE_ALBUM_Live_260630_4.jpg" alt="Fresh & Soft — 99K viewers live stream" /><div class="ov"><span>Fresh & Soft — 99K viewers live stream</span></div></div>
+      <div class="tile"><img src="https://media.base44.com/images/public/6a1e7acf6631539abe61f1ef/dd4be3fe0_LINE_ALBUM_Live_260630_1.jpg" alt="LYO brand live commerce with Miss Grand talent" /><div class="ov"><span>LYO brand live commerce with Miss Grand talent</span></div></div>
+      <div class="tile"><img src="https://media.base44.com/images/public/6a1e7acf6631539abe61f1ef/223e636bc_LINE_ALBUM_Live_260630_6.jpg" alt="Miss Grand talent — YaiLY live commerce" /><div class="ov"><span>Miss Grand talent — YaiLY live commerce</span></div></div>
+      <div class="tile"><img src="https://media.base44.com/images/public/6a1e7acf6631539abe61f1ef/9739fdb5b_LINE_ALBUM_Live_260630_5.jpg" alt="Multi-camera live e-commerce production" /><div class="ov"><span>Multi-camera live e-commerce production</span></div></div>
+      <div class="tile"><img src="https://media.base44.com/images/public/6a1e7acf6631539abe61f1ef/a18ab5755_LINE_ALBUM_Live_260630_3.jpg" alt="Fresh & Soft product campaign live" /><div class="ov"><span>Fresh & Soft product campaign live</span></div></div>
+      <div class="tile"><img src="https://media.base44.com/images/public/6a1e7acf6631539abe61f1ef/3c31cb2e6_LINE_ALBUM_Live_260630_2.jpg" alt="Fresh & Soft — behind the lens" /><div class="ov"><span>Fresh & Soft — behind the lens</span></div></div>
+      <div class="tile"><img src="https://media.base44.com/images/public/6a1e7acf6631539abe61f1ef/a5100b0b4_LINE_ALBUM__260630_2.jpg" alt="Brand studio setup — product showcase" /><div class="ov"><span>Brand studio setup — product showcase</span></div></div>
+      <div class="tile"><img src="https://media.base44.com/images/public/6a1e7acf6631539abe61f1ef/5bd4c7a0b_LINE_ALBUM__260630_1.jpg" alt="Live commerce shoot — talent presentation" /><div class="ov"><span>Live commerce shoot — talent presentation</span></div></div>
+      <div class="tile"><img src="https://media.base44.com/images/public/6a1e7acf6631539abe61f1ef/3185fd373_6B3CF91D-F4E7-4AA8-9ED5-DF2C34431D2E.jpg" alt="Full crew production room — LYO campaign" /><div class="ov"><span>Full crew production room — LYO campaign</span></div></div>
+      <div class="tile"><img src="https://media.base44.com/images/public/6a1e7acf6631539abe61f1ef/08a3bbb9c_F700B9BA-0958-4558-A86B-80C217D1495F.jpg" alt="Studio lighting setup — e-commerce shoot" /><div class="ov"><span>Studio lighting setup — e-commerce shoot</span></div></div>
+      <div class="tile"><img src="https://media.base44.com/images/public/6a1e7acf6631539abe61f1ef/72259e064_IMG_5851_0.jpg" alt="Live E-Commerce setup — talent & product" /><div class="ov"><span>Live E-Commerce setup — talent & product</span></div></div>
+      <div class="tile"><img src="https://media.base44.com/images/public/6a1e7acf6631539abe61f1ef/a48a9c528_IMG_5852_0.jpg" alt="Studio lighting & camera rig — ballroom" /><div class="ov"><span>Studio lighting & camera rig — ballroom</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services" style="background:var(--bg-2);border-top:1px solid var(--line)">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">What We Do</div>
+      <h2>บริการ Live Production</h2>
+      <p>ครบวงจรในที่เดียว — ทีมงาน อุปกรณ์ และระบบมืออาชีพ พร้อมส่งมอบงานคุณภาพระดับ Broadcast</p>
+    </div>
+    <div class="serv-grid">
+      <div class="serv"><div class="ico">📡</div><h3>Event Live Streaming</h3><p>ถ่ายทอดสดงานอีเวนต์ พาเจนท์ คอนเสิร์ต และงาน Corporate — multi-platform (Facebook, YouTube, TikTok)</p></div>
+      <div class="serv"><div class="ico">🛍️</div><h3>Live E-Commerce</h3><p>ผลิตรายการ Live ขายสินค้าพร้อมทีมงานมืออาชีพ — กล้องหลายตัว แสง กราฟิก และ Director</p></div>
+      <div class="serv"><div class="ico">🎬</div><h3>Multi-Camera Production</h3><p>ระบบสลับกล้องหลายมุม (Switching) ด้วย vMix / OBS พร้อม Director ควบคุม real-time</p></div>
+      <div class="serv"><div class="ico">⚡</div><h3>Instant Replay & Graphics</h3><p>ระบบ Replay ทันที และ Graphic Overlay สำหรับงานกีฬา พาเจนท์ และงาน Corporate</p></div>
+      <div class="serv"><div class="ico">🎤</div><h3>Talent + Presenter Package</h3><p>จัดหา Presenter และ KOL ทำงานร่วมกับทีม Live เพื่อเพิ่มยอดขายและการมีส่วนร่วม</p></div>
+      <div class="serv"><div class="ico">🎛️</div><h3>Full Production Package</h3><p>ครบครัน — เวที แสง เสียง กล้อง Live Streaming และทีม Production ในที่เดียว</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- RATE CARD -->
+<section id="rates">
+  <div class="wrap">
+    <div class="sec-head" style="max-width:680px">
+      <div class="eyebrow">Rate Card</div>
+      <h2>Live Streaming Service Rate Card</h2>
+      <p>บริการถ่ายทอดสดแบบครบวงจร ด้วยทีมงานและอุปกรณ์คุณภาพ — ราคารวมทีมงานและระบบมาตรฐาน</p>
+    </div>
+    <div class="price-grid">
+
+      <!-- STANDARD -->
+      <div class="plan">
+        <div class="ptype">Standard Package</div>
+        <h3>Standard</h3>
+        <div class="for">สำหรับงานเล็ก / ไลฟ์สั้น</div>
+        <div class="price">11,990 <small>THB</small></div>
+        <div class="unit">1–2 ชั่วโมง</div>
+        <div class="note">ใช้งานต่อเนื่อง (ไม่สามารถแบ่งชั่วโมงได้) · เพิ่มชั่วโมงละ 3,000 บาท</div>
+        <div class="sub-h">รวมในแพ็กเกจ</div>
+        <ul class="feat-list">
+          <li>2 กล้อง Mirrorless (เพิ่มตัวละ 1,800 บาท)</li>
+          <li>ไฟต่อเนื่อง Full Stream</li>
+          <li>ระบบเสียง Full Stream</li>
+          <li>ระบบ OB</li>
+          <li>Free Internet</li>
+          <li>ไลฟ์ได้ 1 Platform</li>
+        </ul>
+        <div class="sub-h">Add-on</div>
+        <ul class="addon">
+          <li>เฟรมไลฟ์สด / Art-Work / Backdrop เริ่มต้น 900 บาท</li>
+          <li>MC 3,000 – 12,000 บาท</li>
+          <li>Multi Platform +1,200 บาท/platform</li>
+        </ul>
+        <a class="btn btn-ghost" href="#contact">เลือกแพ็กเกจนี้</a>
+      </div>
+
+      <!-- PRO (featured) -->
+      <div class="plan featured">
+        <div class="flag">★ BEST VALUE</div>
+        <div class="ptype">Pro Package</div>
+        <h3>Pro</h3>
+        <div class="for">คุ้มค่าที่สุด / ใช้ได้หลายครั้ง</div>
+        <div class="price">53,990 <small>THB</small></div>
+        <div class="unit">10 ชั่วโมง · ซื้อเหมาชั่วโมง ลดพิเศษ</div>
+        <div class="tiers">
+          <div class="tier"><span>20 ชม. <span class="off">-5%</span></span><b>102,900 ฿</b></div>
+          <div class="tier"><span>30 ชม. <span class="off">-7%</span></span><b>150,900 ฿</b></div>
+          <div class="tier"><span>50 ชม. <span class="off">-10%</span></span><b>242,900 ฿</b></div>
+          <div class="tier"><span>100 ชม. <span class="off">-15%</span></span><b>458,900 ฿</b></div>
+        </div>
+        <div class="note">✓ สามารถแบ่งชั่วโมงใช้งานได้ · ★ เหมาะสำหรับใช้งานหลายครั้ง ประหยัดกว่า!</div>
+        <div class="sub-h">รวมในแพ็กเกจ</div>
+        <ul class="feat-list">
+          <li>2 กล้อง Mirrorless (เพิ่มตัวละ 1,800 บาท)</li>
+          <li>ไฟต่อเนื่อง Full Stream</li>
+          <li>ระบบเสียง Full Stream</li>
+          <li>ระบบ OB</li>
+          <li>Free Internet</li>
+          <li>ไลฟ์ได้ 1 Platform</li>
+        </ul>
+        <div class="sub-h">Add-on</div>
+        <ul class="addon">
+          <li>เฟรมไลฟ์สด / Art-Work / Backdrop เริ่มต้น 900 บาท</li>
+          <li>MC 3,000 – 12,000 บาท</li>
+          <li>Multi Platform +1,200 บาท/platform</li>
+        </ul>
+        <a class="btn btn-grad" href="#contact">เลือกแพ็กเกจนี้</a>
+      </div>
+
+      <!-- MOU / ENTERPRISE -->
+      <div class="plan">
+        <div class="ptype">MOU Package</div>
+        <h3>MOU · Enterprise</h3>
+        <div class="for">สำหรับองค์กร / ใช้งานระยะยาว</div>
+        <div class="price"><small>เริ่มต้น</small> 599,000 <small>THB</small></div>
+        <div class="unit">150+ ชั่วโมง · ลด 25% + แถมอุปกรณ์ฟรี</div>
+        <div class="gift">
+          <div class="gh">🎁 แถมฟรี! อุปกรณ์ไลฟ์สด 1 ชุด</div>
+          <ul>
+            <li>กล้อง Canon M50 Mark II (1 ตัว)</li>
+            <li>ไฟต่อเนื่อง 2 ชุด พร้อมขาตั้ง</li>
+            <li>ไมค์ไร้สาย 1 ชุด (2 ตัว)</li>
+            <li>Backdrop 1 เซ็ต พร้อมพื้นหลังเขียว</li>
+          </ul>
+        </div>
+        <div class="note">✓ แบ่งชั่วโมงใช้งานได้ · ★ ประหยัดสูงสุด 25% — คุ้มค่าที่สุด!</div>
+        <div class="sub-h">รวมในแพ็กเกจ</div>
+        <ul class="feat-list">
+          <li>2 กล้อง Mirrorless (เพิ่มตัวละ 1,800 บาท)</li>
+          <li>ไฟต่อเนื่อง Full Stream</li>
+          <li>ระบบเสียง Full Stream</li>
+          <li>ระบบ OB · Free Internet</li>
+          <li>ไลฟ์ได้ 1 Platform</li>
+        </ul>
+        <a class="btn btn-ghost" href="#contact">ติดต่อสอบถาม MOU</a>
+      </div>
+
+    </div>
+    <p style="text-align:center;color:var(--muted);font-size:.82rem;margin-top:26px">* ราคายังไม่รวมภาษีมูลค่าเพิ่ม (VAT 7%) · เงื่อนไขเป็นไปตามที่บริษัทกำหนด</p>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta" id="contact">
+  <div class="glow"></div>
+  <div class="wrap">
+    <div class="eyebrow">รับงาน LIVE ทุกประเภท</div>
+    <h2>พร้อม Go Live<br />เมื่อคุณพร้อม</h2>
+    <p>ติดต่อทีม Yushi Live Production เพื่อรับ Package ที่เหมาะกับงานของคุณ — ตั้งแต่งานเล็กไปจนถึงงาน Production ระดับจังหวัด</p>
+    <div class="cta-btns">
+      <a class="btn btn-grad" href="tel:+66661515659"><span class="live-dot"></span> โทร 066-151-5659</a>
+      <a class="btn btn-ghost" href="https://line.me/R/ti/p/@ymtagency" target="_blank" rel="noopener">LINE @ymtagency →</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="wrap">
+    <div class="foot">
+      <div class="brandcol">
+        <img class="flogo" src="https://yushi-marketing.com/wp-content/uploads/2024/07/YMT-logo-wh-1_white.png" alt="Yushi Marketing Technology" />
+        <p>Yushi Marketing Technology (YMT) — One Stop Live Commerce Solution. บริการ Live Streaming, Live E-Commerce, Influencer Marketing และ AI Development ครบวงจร</p>
+      </div>
+      <div>
+        <h4>บริการ</h4>
+        <a href="#services">Event Live Streaming</a>
+        <a href="#services">Live E-Commerce</a>
+        <a href="#services">Multi-Camera Production</a>
+        <a href="#rates">Rate Card</a>
+        <a href="deck/">Pitch Deck (Slides) →</a>
+      </div>
+      <div>
+        <h4>ติดต่อ</h4>
+        <a href="tel:+66661515659">โทร 066-151-5659</a>
+        <a href="https://line.me/R/ti/p/@ymtagency" target="_blank" rel="noopener">LINE @ymtagency</a>
+        <a href="https://www.facebook.com/profile.php?id=61556415450891" target="_blank" rel="noopener">Facebook</a>
+        <a href="https://www.linkedin.com/company/103679822/" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="https://yushi-marketing.com" target="_blank" rel="noopener">yushi-marketing.com</a>
+      </div>
+    </div>
+    <div class="copy">
+      <span>© 2026 Yushi Marketing Technology (YMT). All rights reserved.</span>
+      <span class="powered">Live Production powered by partner studio network</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
