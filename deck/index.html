@@ -12,6 +12,12 @@
 <meta property="og:description" content="โปรดักชันไลฟ์ระดับ Broadcast สำหรับงานอีเวนต์ พาเจนท์ และ Live E-Commerce" />
 <meta property="og:image" content="https://media.base44.com/images/public/6a1e7acf6631539abe61f1ef/de8b80c0f_43B15B39-965D-4FFC-85E9-6B4E26207270.jpg" />
 <meta name="twitter:card" content="summary_large_image" />
+<!-- iOS / Android home-screen app: launches chrome-less (no address bar) -->
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="apple-mobile-web-app-title" content="Yushi LIVE" />
+<meta name="mobile-web-app-capable" content="yes" />
+<meta name="theme-color" content="#0a0a0d" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@400;500;600;700;800&family=Sora:wght@400;600;700;800&display=swap" rel="stylesheet" />
@@ -542,6 +548,16 @@
   }
   const presentBtn=document.getElementById('present');
   presentBtn.onclick=toggleFs;
+  // tap-to-advance on touch screens (left third = back, rest = forward); swipes ignored
+  let tDownX=null;
+  deck.addEventListener('pointerdown',e=>{tDownX=e.pointerType==='touch'?e.clientX:null;});
+  deck.addEventListener('pointerup',e=>{
+    if(e.pointerType!=='touch'||tDownX==null) return;
+    const dx=e.clientX-tDownX; tDownX=null;
+    if(Math.abs(dx)>30) return;                                   // it was a swipe — let scroll-snap handle it
+    if(e.target.closest('a,button,.arrow,.present,.nd,.dotnav')) return;
+    go(e.clientX < window.innerWidth*0.33 ? cur-1 : cur+1);
+  });
   document.addEventListener('fullscreenchange',()=>{
     presentBtn.textContent=document.fullscreenElement?'⤢ Exit':'⛶ Present';
     setTimeout(()=>deck.scrollTo({left:cur*window.innerWidth}),100);
