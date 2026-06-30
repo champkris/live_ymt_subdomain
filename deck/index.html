@@ -185,6 +185,8 @@
   .arrow:hover{background:rgba(255,255,255,.15)}
   .arrow.prev{left:1.6vw}.arrow.next{right:1.6vw}
   .hint{position:fixed;z-index:50;top:2vh;left:2vw;font-family:'Sora',sans-serif;font-size:.8vw;color:rgba(255,255,255,.4)}
+  .present{position:fixed;z-index:51;bottom:2.2vh;right:1.6vw;display:inline-flex;align-items:center;gap:.5vw;background:rgba(0,0,0,.5);backdrop-filter:blur(8px);border:1px solid var(--line);color:#fff;font-family:'Sora',sans-serif;font-weight:700;font-size:.85vw;padding:1.1vh 1.3vw;border-radius:999px;cursor:pointer;transition:.2s}
+  .present:hover{background:var(--grad);border-color:transparent}
 
   /* force-landscape gate (portrait phones/tablets only) */
   .rotate-prompt{position:fixed;inset:0;z-index:200;background:var(--bg);display:none;flex-direction:column;align-items:center;justify-content:center;gap:4vw;text-align:center;padding:10vw}
@@ -194,13 +196,25 @@
   .rotate-prompt p{color:var(--muted);font-size:4vw;line-height:1.5;max-width:84vw}
   @keyframes rotatehint{0%,55%{transform:rotate(0)}80%,100%{transform:rotate(-90deg)}}
   @media (orientation:portrait) and (max-width:1024px){
-    .deck,.arrow,.ui,.hint{display:none!important}
+    .deck,.arrow,.ui,.hint,.present{display:none!important}
     .rotate-prompt{display:flex}
   }
 
   @media(max-width:760px){
     .wm b,.wm span,.pageno,.eyebrow{font-size:2.4vw}
     .hint{display:none}
+  }
+
+  /* PDF / print — one landscape 16:9 slide per page, scroll down through pages */
+  @media print{
+    @page{size:1440px 810px;margin:0}
+    *{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important}
+    html,body{width:auto;height:auto;overflow:visible;background:#000}
+    .deck{display:block;width:auto;height:auto;overflow:visible;scroll-snap-type:none}
+    .slide{display:block;width:1440px;height:810px;overflow:hidden;break-after:page;page-break-after:always}
+    .slide:last-child{break-after:auto;page-break-after:auto}
+    .stage{width:1440px;height:810px;margin:0}
+    .arrow,.ui,.hint,.rotate-prompt,.present{display:none!important}
   }
 </style>
 </head>
@@ -492,6 +506,7 @@
 <div class="arrow prev" id="prev">‹</div>
 <div class="arrow next" id="next">›</div>
 <div class="ui"><div class="dotnav" id="dots"></div></div>
+<button class="present" id="present" aria-label="Present fullscreen">⛶ Present</button>
 <div class="hint">← → to navigate · F for fullscreen</div>
 
 <script>
@@ -525,6 +540,12 @@
       }).catch(()=>{});
     } else document.exitFullscreen?.();
   }
+  const presentBtn=document.getElementById('present');
+  presentBtn.onclick=toggleFs;
+  document.addEventListener('fullscreenchange',()=>{
+    presentBtn.textContent=document.fullscreenElement?'⤢ Exit':'⛶ Present';
+    setTimeout(()=>deck.scrollTo({left:cur*window.innerWidth}),100);
+  });
   // re-align the current slide after an orientation change
   window.addEventListener('orientationchange',()=>setTimeout(()=>deck.scrollTo({left:cur*window.innerWidth}),300));
 </script>
