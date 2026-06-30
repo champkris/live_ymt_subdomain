@@ -63,10 +63,10 @@
     linear-gradient(90deg,#0a0a0d 16%,rgba(10,10,13,.6) 60%,rgba(10,10,13,.3)),
     linear-gradient(180deg,rgba(10,10,13,.85) 0%,rgba(10,10,13,0) 30%)}
   .cover .pad{z-index:2}
-  .cover .logo{height:8vh;width:auto;align-self:flex-start;margin-bottom:4.5vh;filter:drop-shadow(0 .3vh 1.2vh rgba(0,0,0,.9))}
+  .cover .logo{height:10vh;width:auto;align-self:flex-start;margin-bottom:4.5vh;filter:drop-shadow(0 .3vh 1.2vh rgba(0,0,0,.9))}
 
   /* corner logo on every slide */
-  .cornerlogo{position:absolute;top:5%;right:5.5%;height:4.4vh;width:auto;z-index:6;opacity:1;filter:drop-shadow(0 .2vh .9vh rgba(0,0,0,.7));pointer-events:none}
+  .cornerlogo{position:absolute;top:4.5%;right:5%;height:6.4vh;width:auto;z-index:6;opacity:1;filter:drop-shadow(0 .2vh .9vh rgba(0,0,0,.7));pointer-events:none}
   .cover h1{font-size:6.6vw;font-weight:800}
   .cover .sub{font-size:1.9vw;color:#dcdce4;margin-top:2.4vh;max-width:46vw;font-weight:500}
   .badge{display:inline-flex;align-self:flex-start;align-items:center;gap:.6vw;padding:.7vh 1.3vw;border-radius:999px;border:1px solid var(--line);background:rgba(255,255,255,.05);font-family:'Sora',sans-serif;font-weight:700;font-size:.95vw;letter-spacing:.14em}
@@ -144,7 +144,7 @@
   .col.win li::before{content:"✓";color:#fff}
 
   /* ---------- Rate cards ---------- */
-  .plans{display:grid;grid-template-columns:repeat(3,1fr);gap:1.4vw;margin-top:3vh;align-items:start}
+  .plans{display:grid;grid-template-columns:repeat(2,1fr);gap:1.8vw;margin:3vh auto 0;max-width:66%;align-items:start}
   .plan{background:var(--card);border:1px solid var(--line);border-radius:1.2vw;padding:2.8vh 1.6vw;position:relative}
   .plan.feat{border:1px solid transparent;background:linear-gradient(var(--card),var(--card)) padding-box,var(--grad) border-box;box-shadow:0 1.6vh 4vh rgba(155,92,255,.22)}
   .plan .flag{position:absolute;top:-1.3vh;left:50%;transform:translateX(-50%);background:var(--grad);font-family:'Sora',sans-serif;font-weight:800;font-size:.8vw;letter-spacing:.12em;padding:.5vh 1.1vw;border-radius:999px;white-space:nowrap}
@@ -407,23 +407,11 @@
             <div class="flag">★ BEST VALUE</div>
             <div class="ty">Pro</div><h3>Pro</h3><div class="for">คุ้มที่สุด / 10 ชม. แบ่งใช้ได้</div>
             <div class="price">53,990 <small>฿</small></div>
-            <div class="unit">เหมาชั่วโมง ลดสูงสุด -15% · ใช้งานได้หลายครั้ง</div>
+            <div class="unit">เหมาชั่วโมง ลดสูงสุด -10% · ใช้งานได้หลายครั้ง</div>
             <ul>
               <li>20 ชม. — 102,900 ฿ <b style="color:#ff8a3d">(-5%)</b></li>
               <li>30 ชม. — 150,900 ฿ <b style="color:#ff8a3d">(-7%)</b></li>
               <li>50 ชม. — 242,900 ฿ <b style="color:#ff8a3d">(-10%)</b></li>
-              <li>100 ชม. — 458,900 ฿ <b style="color:#ff8a3d">(-15%)</b></li>
-            </ul>
-          </div>
-          <div class="plan">
-            <div class="ty">MOU · Enterprise</div><h3>MOU</h3><div class="for">องค์กร / ระยะยาว 150+ ชม.</div>
-            <div class="price"><small>เริ่มต้น</small> 599,000 <small>฿</small></div>
-            <div class="unit">ลด 25% + แถมชุดอุปกรณ์ไลฟ์ฟรี 1 ชุด</div>
-            <ul>
-              <li>กล้อง Canon M50 Mark II</li>
-              <li>ไฟต่อเนื่อง 2 ชุด + ขาตั้ง</li>
-              <li>ไมค์ไร้สาย 1 ชุด (2 ตัว)</li>
-              <li>Backdrop + ฉากเขียว</li>
             </ul>
           </div>
         </div>
@@ -449,8 +437,6 @@
             <tr><td style="text-align:left">20 ชั่วโมง</td><td class="hi">102,900</td><td>5,145 ฿</td><td class="off">-5%</td></tr>
             <tr><td style="text-align:left">30 ชั่วโมง</td><td class="hi">150,900</td><td>5,030 ฿</td><td class="off">-7%</td></tr>
             <tr><td style="text-align:left">50 ชั่วโมง</td><td class="hi">242,900</td><td>4,858 ฿</td><td class="off">-10%</td></tr>
-            <tr><td style="text-align:left">100 ชั่วโมง</td><td class="hi">458,900</td><td>4,589 ฿</td><td class="off">-15%</td></tr>
-            <tr><td style="text-align:left">150+ ชม. (MOU)</td><td class="hi">เริ่ม 599,000</td><td>ต่ำสุด</td><td class="off">-25% + อุปกรณ์ฟรี</td></tr>
           </tbody>
         </table>
         <div class="cnote">ยิ่งเหมาชั่วโมงมาก ยิ่งประหยัด — แบ่งชั่วโมงใช้งานได้หลายครั้ง · ราคายังไม่รวม VAT 7%</div>
