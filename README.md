@@ -9,6 +9,8 @@ Sales page and pitch deck for Yushi Marketing Technology's **Live Streaming & Pr
 
 Both are self-contained static HTML (no build step) — open directly or serve any static host.
 
+**Production:** https://livestream.yushi-marketing.com/ (sales page) · https://livestream.yushi-marketing.com/deck/ (pitch deck)
+
 ## Brand & pricing
 
 - Dark theme with the Yushi rainbow-gradient accent and logo.
