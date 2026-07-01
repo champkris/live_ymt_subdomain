@@ -160,9 +160,11 @@
   .plan .price{font-family:'Sora',sans-serif;font-weight:800;font-size:2.5vw;line-height:1}
   .plan .price small{font-size:1vw;color:var(--muted);font-weight:600}
   .plan .unit{color:var(--muted);font-size:.95vw;margin:.6vh 0 1.6vh;padding-bottom:1.4vh;border-bottom:1px dashed var(--line)}
-  .plan ul{list-style:none;display:flex;flex-direction:column;gap:1vh}
-  .plan li{display:flex;gap:.7vw;font-size:1vw;align-items:flex-start;line-height:1.35}
+  .plan ul{list-style:none;display:flex;flex-direction:column;gap:.7vh}
+  .plan li{display:flex;gap:.6vw;font-size:.92vw;align-items:flex-start;line-height:1.3}
   .plan li::before{content:"✓";color:#3ddc84;font-weight:800;flex:0 0 auto}
+  .plan .subh{font-family:'Sora',sans-serif;font-weight:800;font-size:.7vw;letter-spacing:.12em;color:var(--muted);text-transform:uppercase;margin:1.4vh 0 .8vh}
+  .plan .addon li::before{content:"+";color:#ff8a3d}
 
   /* ---------- Costing table ---------- */
   .ctable{margin-top:3.5vh;width:100%;border-collapse:collapse;background:var(--grad-soft);border:1px solid var(--line);border-radius:1.2vw;overflow:hidden}
@@ -429,12 +431,21 @@
           <div class="plan">
             <div class="ty">Standard</div><h3>Standard</h3><div class="for">งานเล็ก / ไลฟ์สั้น 1–2 ชม.</div>
             <div class="price">11,990 <small>฿</small></div>
-            <div class="unit">เพิ่มชั่วโมงละ 3,000 ฿ · เพิ่มกล้อง 1,800 ฿/ตัว</div>
+            <div class="unit">ใช้งานต่อเนื่อง (แบ่งชั่วโมงไม่ได้) · เพิ่มชั่วโมงละ 3,000 ฿</div>
+            <div class="subh">รวมในแพ็กเกจ</div>
             <ul>
-              <li>2 กล้อง Mirrorless</li>
-              <li>ไฟ + ระบบเสียง Full Stream</li>
-              <li>ระบบ OB · Free Internet</li>
+              <li>2 กล้อง Mirrorless (เพิ่มตัวละ 1,800 ฿)</li>
+              <li>ไฟต่อเนื่อง Full Stream</li>
+              <li>ระบบเสียง Full Stream</li>
+              <li>ระบบ OB</li>
+              <li>Free Internet</li>
               <li>ไลฟ์ได้ 1 Platform</li>
+            </ul>
+            <div class="subh">Add-on</div>
+            <ul class="addon">
+              <li>เฟรมไลฟ์สด / Art-Work / Backdrop เริ่มต้น 900 ฿</li>
+              <li>MC 3,000 – 12,000 ฿</li>
+              <li>Multi Platform +1,200 ฿/platform</li>
             </ul>
           </div>
           <div class="plan feat">
@@ -447,9 +458,24 @@
               <li>30 ชม. — 150,900 ฿ <b style="color:#ff8a3d">(-7%)</b></li>
               <li>50 ชม. — 242,900 ฿ <b style="color:#ff8a3d">(-10%)</b></li>
             </ul>
+            <div class="subh">รวมในแพ็กเกจ</div>
+            <ul>
+              <li>2 กล้อง Mirrorless (เพิ่มตัวละ 1,800 ฿)</li>
+              <li>ไฟต่อเนื่อง Full Stream</li>
+              <li>ระบบเสียง Full Stream</li>
+              <li>ระบบ OB</li>
+              <li>Free Internet</li>
+              <li>ไลฟ์ได้ 1 Platform</li>
+            </ul>
+            <div class="subh">Add-on</div>
+            <ul class="addon">
+              <li>เฟรมไลฟ์สด / Art-Work / Backdrop เริ่มต้น 900 ฿</li>
+              <li>MC 3,000 – 12,000 ฿</li>
+              <li>Multi Platform +1,200 ฿/platform</li>
+            </ul>
           </div>
         </div>
-        <div class="cnote">* ราคายังไม่รวม VAT 7% · Add-on: เฟรม/Backdrop เริ่ม 900 ฿ · MC 3,000–12,000 ฿ · Multi-platform +1,200 ฿/platform</div>
+        <div class="cnote">* ราคายังไม่รวมภาษีมูลค่าเพิ่ม VAT 7%</div>
       </div>
       <div class="wm"><b>BUSINESS PROFILE</b><span>Private and confidential</span></div>
       <div class="pageno">09</div>
